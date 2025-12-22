@@ -1,8 +1,8 @@
 # Customer Churn Analysis
 
 ## Project Overview
-This project analyzes customer churn behavior using the Telco Customer Churn dataset.  
-The goal is to identify key drivers of churn and provide actionable, data driven business insights.
+This project analyzes customer churn behavior using a real-world telecommunications dataset.  
+The goal is to identify key factors associated with customer churn and translate data insights into actionable business recommendations.
 
 The project follows a structured data analytics workflow:
 1. Data loading and inspection
@@ -25,14 +25,12 @@ The project follows a structured data analytics workflow:
 
 ## Tools and Libraries
 - Python
-- pandas
-- numpy
-- matplotlib
-- seaborn
-- scipy
-- statsmodels
+- pandas, numpy
+- matplotlib, seaborn
+- scipy, statsmodels
 - scikit-learn
 - Jupyter Notebook
+- Git & GitHub
 
 ---
 
@@ -40,53 +38,52 @@ The project follows a structured data analytics workflow:
 ```
 .
 ├── data
+│   ├── clean_churn.csv
 │   └── raw_churn.csv
 ├── figures
 ├── notebooks
-│   └── 01_load_and_inspect.ipynb
+│   ├── 01_load_and_inspect.ipynb
+│   └── 02_data_cleaning.ipynb
 ├── README.md
 ├── requirements.txt
 └── src
 ```
 
+---
+
+## Workflow
+1. **Data Loading & Inspection**
+   - Initial data audit
+   - Variable inspection and data type validation
+   - Target variable exploration
+
+2. **Data Cleaning**
+   - Converted `TotalCharges` to numeric
+   - Handled missing values
+   - Encoded churn as a binary variable
+   - Standardized categorical variables
+   - Engineered tenure-based features
+
+3. **Exploratory Data Analysis (next)**
+   - Churn patterns by customer segments
+   - Service and contract-level analysis
+   - Visual insights
+
+4. **Statistical Analysis & Modeling (upcoming)**
+   - Hypothesis testing
+   - Logistic regression
+   - Model interpretation
 
 ---
 
-## Step 1: Data Loading and Inspection
-**Notebook**: `notebooks/01_load_and_inspect.ipynb`
-
-In this step, we:
-- Load the raw dataset
-- Inspect dimensions, column types, and structure
-- Check for missing values and duplicates
-- Examine the distribution of the target variable (`Churn`)
-- Identify categorical and numerical features
-
-### Key Initial Observations
-- The dataset contains approximately 7,000 observations and 21 features
-- The target variable `Churn` is binary and moderately imbalanced
-- Most features are categorical
-- `TotalCharges` is stored as a string and requires cleaning
-- No duplicate records are present
-
-This initial inspection informs all subsequent cleaning and analysis steps.
+## Key Data Cleaning Decisions
+- Rows with invalid `TotalCharges` values were removed due to minimal impact (<0.2%)
+- Customer identifiers were excluded from analysis
+- Tenure was grouped to support customer segmentation
 
 ---
 
 ## Status
 🚧 In progress  
-Currently completed: **Step 1 – Data Loading and Inspection**
-
----
-
-## Next Steps
-- Clean and preprocess the data
-- Perform exploratory data analysis
-- Apply statistical tests to identify churn drivers
-- Build interpretable predictive models
-- Translate findings into business recommendations
-
-
-
-
-
+- Data cleaning completed  
+- EDA and modeling in progress
