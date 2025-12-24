@@ -25,12 +25,11 @@ The project follows a structured data analytics workflow:
 
 ## Tools and Libraries
 - Python
-- pandas, numpy
-- matplotlib, seaborn
-- scipy, statsmodels
-- scikit-learn
-- Jupyter Notebook
-- Git & GitHub
+- pandas and NumPy for data manipulation
+- matplotlib and seaborn for visualization
+- scipy and statsmodels for statistical analysis
+- Jupyter Notebook for analysis and documentation
+- Git and GitHub for version control
 
 ---
 
@@ -41,9 +40,16 @@ The project follows a structured data analytics workflow:
 │   ├── clean_churn.csv
 │   └── raw_churn.csv
 ├── figures
+│   ├── churn_by_constract.png
+│   ├── churn_by_internet_service_type.png
+│   ├── churn_by_payment_methods.png
+│   ├── churn_by_tenure_group.png
+│   ├── correlation_matrix.png
+│   └── monthly_charges_by_churn_status.png
 ├── notebooks
 │   ├── 01_load_and_inspect.ipynb
-│   └── 02_data_cleaning.ipynb
+│   ├── 02_data_cleaning.ipynb
+│   └── 03_eda.ipynb
 ├── README.md
 ├── requirements.txt
 └── src
@@ -53,23 +59,41 @@ The project follows a structured data analytics workflow:
 
 ## Workflow
 1. **Data Loading & Inspection**
-   - Initial data audit
-   - Variable inspection and data type validation
-   - Target variable exploration
+   The initial stage of the project focused on loading the raw dataset and performing a comprehensive data inspection to understand its structure and quality.
+
+    Key steps included:
+    - Loading the raw Telco Customer Churn dataset into Python using pandas
+    - Examining dataset dimensions, column names, and data types
+    - Identifying categorical and numerical variables
+    - Inspecting the target variable distribution to assess class balance
+    - Checking for missing values and duplicate records
+
+    Initial inspection showed that the dataset contains approximately 7,000 customer records with a mix of demographic, service, and billing features. The churn variable is moderately imbalanced, with roughly one quarter of customers having churned. Most features are categorical, indicating the need for encoding and careful preprocessing in later stages. One billing variable, `TotalCharges`, was identified as requiring further cleaning due to incorrect data type representation.
 
 2. **Data Cleaning**
-   - Converted `TotalCharges` to numeric
-   - Handled missing values
-   - Encoded churn as a binary variable
-   - Standardized categorical variables
-   - Engineered tenure-based features
+   Key data preparation steps included:
+    - Converting `TotalCharges` from string to numeric format
+    - Removing invalid records with missing total charges
+    - Encoding the churn variable as a binary indicator
+    - Standardizing categorical variables
+    - Creating tenure groups for customer segmentation
 
-3. **Exploratory Data Analysis (next)**
-   - Churn patterns by customer segments
-   - Service and contract-level analysis
-   - Visual insights
+    The cleaned dataset is saved as `clean_churn.csv` for reproducibility.
 
-4. **Statistical Analysis & Modeling (upcoming)**
+
+3. **Exploratory Data Analysis**
+   Exploratory analysis revealed several strong churn patterns:
+
+    - Customers on month-to-month contracts exhibit significantly higher churn
+    - New customers with tenure below 12 months are most likely to churn
+    - Higher monthly charges are associated with increased churn risk
+    - Customers using automatic payment methods tend to churn less
+    - Fiber optic service customers show higher churn than DSL users
+
+    These findings highlight both behavioral and pricing factors related to customer retention.
+
+
+4. **Statistical Analysis & Modeling (next)**
    - Hypothesis testing
    - Logistic regression
    - Model interpretation
