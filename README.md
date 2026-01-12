@@ -1,35 +1,25 @@
 # Customer Churn Analysis
 
-## Project Overview
-This project analyzes customer churn behavior using a real-world telecommunications dataset.  
-The goal is to identify key factors associated with customer churn and translate data insights into actionable business recommendations.
-
-The project follows a structured data analytics workflow:
-1. Data loading and inspection
-2. Data cleaning and preprocessing
-3. Exploratory data analysis (EDA)
-4. Statistical analysis
-5. Predictive modeling
-6. Business insights and recommendations
+## Objective
+The goal of this project is to analyze customer behavior and identify key drivers of customer churn using data analytics, statistical testing, and interpretable modeling. The project focuses on translating data insights into actionable business recommendations.
 
 ---
 
 ## Dataset
-- **Name**: Telco Customer Churn
-- **Source**: IBM Sample Data / Kaggle
-- **Size**: ~7,000 customer records
-- **Description**:  
-  The dataset contains customer demographics, service usage, contract details, and billing information, along with a binary churn indicator.
+- **Source**: Telco Customer Churn dataset
+- **Observations**: ~7,000 customers
+- **Features**: Demographics, service usage, billing information
+- **Target variable**: Churn (1 = Yes, 0 = No)
 
 ---
 
-## Tools and Libraries
+## Tools & Technologies
 - Python
-- pandas and NumPy for data manipulation
-- matplotlib and seaborn for visualization
-- scipy and statsmodels for statistical analysis
-- Jupyter Notebook for analysis and documentation
-- Git and GitHub for version control
+- pandas, numpy
+- matplotlib, seaborn
+- scipy, statsmodels
+- scikit-learn
+- Jupyter Notebook
 
 ---
 
@@ -45,69 +35,67 @@ The project follows a structured data analytics workflow:
 │   ├── churn_by_payment_methods.png
 │   ├── churn_by_tenure_group.png
 │   ├── correlation_matrix.png
-│   └── monthly_charges_by_churn_status.png
+│   ├── monthly_charges_by_churn_status.png
+│   └── roc_curve.png
 ├── notebooks
 │   ├── 01_load_and_inspect.ipynb
 │   ├── 02_data_cleaning.ipynb
-│   └── 03_eda.ipynb
+│   ├── 03_eda.ipynb
+│   ├── 04_statistical_analysis.ipynb
+│   └── 05_modeling.ipynb
 ├── README.md
 ├── requirements.txt
 └── src
+
 ```
 
 ---
 
-## Workflow
-1. **Data Loading & Inspection**
-   The initial stage of the project focused on loading the raw dataset and performing a comprehensive data inspection to understand its structure and quality.
+## Methodology
+1. **Data Cleaning**
+   - Converted `TotalCharges` to numeric and handled missing values
+   - Removed non-informative identifiers
+   - Engineered tenure-based features
 
-    Key steps included:
-    - Loading the raw Telco Customer Churn dataset into Python using pandas
-    - Examining dataset dimensions, column names, and data types
-    - Identifying categorical and numerical variables
-    - Inspecting the target variable distribution to assess class balance
-    - Checking for missing values and duplicate records
+2. **Exploratory Data Analysis (EDA)**
+   - Analyzed churn patterns by contract type, tenure, payment method, and pricing
+   - Visualized key relationships using bar charts and boxplots
 
-    Initial inspection showed that the dataset contains approximately 7,000 customer records with a mix of demographic, service, and billing features. The churn variable is moderately imbalanced, with roughly one quarter of customers having churned. Most features are categorical, indicating the need for encoding and careful preprocessing in later stages. One billing variable, `TotalCharges`, was identified as requiring further cleaning due to incorrect data type representation.
+3. **Statistical Analysis**
+   - Chi-square tests for categorical variables
+   - Two-sample t-tests for pricing differences
+   - Logistic regression for statistical interpretation of churn drivers
 
-2. **Data Cleaning**
-   Key data preparation steps included:
-    - Converting `TotalCharges` from string to numeric format
-    - Removing invalid records with missing total charges
-    - Encoding the churn variable as a binary indicator
-    - Standardizing categorical variables
-    - Creating tenure groups for customer segmentation
-
-    The cleaned dataset is saved as `clean_churn.csv` for reproducibility.
-
-
-3. **Exploratory Data Analysis**
-   Exploratory analysis revealed several strong churn patterns:
-
-    - Customers on month-to-month contracts exhibit significantly higher churn
-    - New customers with tenure below 12 months are most likely to churn
-    - Higher monthly charges are associated with increased churn risk
-    - Customers using automatic payment methods tend to churn less
-    - Fiber optic service customers show higher churn than DSL users
-
-    These findings highlight both behavioral and pricing factors related to customer retention.
-
-
-4. **Statistical Analysis & Modeling (next)**
-   - Hypothesis testing
-   - Logistic regression
-   - Model interpretation
+4. **Modeling**
+   - Built an interpretable logistic regression model
+   - Evaluated performance using confusion matrix and ROC–AUC
 
 ---
 
-## Key Data Cleaning Decisions
-- Rows with invalid `TotalCharges` values were removed due to minimal impact (<0.2%)
-- Customer identifiers were excluded from analysis
-- Tenure was grouped to support customer segmentation
+## Key Findings
+- Month-to-month contract customers have significantly higher churn rates
+- Customers with tenure under 12 months are at highest risk of churn
+- Higher monthly charges are associated with increased churn
+- Automatic payment methods are linked to lower churn probability
 
 ---
 
-## Status
-🚧 In progress  
-- Data cleaning completed  
-- EDA and modeling in progress
+## Business Recommendations
+- Incentivize customers to switch from month-to-month to long-term contracts
+- Implement early engagement programs for new customers
+- Offer targeted pricing or discounts to high-risk segments
+
+---
+
+## Limitations
+- No advanced hyperparameter tuning
+- Class imbalance addressed implicitly
+- Focus on interpretability over maximum predictive accuracy
+
+---
+
+## How to Run
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+2. Run notebooks from `01_load_and_inspect.ipynb` to `05_modeling.ipynb`.
